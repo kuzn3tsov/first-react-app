@@ -2,9 +2,17 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
+import { nanoid } from 'nanoid'
+import add , { multiply }  from './library/math.js';
+import { truncate }  from './library/string.js';
+
+add(2, 3);
+multiply(4, 5);
+const truncated = truncate("Hello, world!", 5, "...");
 
 function App() {
   const [count, setCount] = useState(0)
+  const id = nanoid();
 
   return (
     <>
@@ -16,7 +24,7 @@ function App() {
           <img src={reactLogo} className="logo react" alt="React logo" />
         </a>
       </div>
-      <h1>Vite + React</h1>
+      <h1>Vite + React { id }</h1>
       <div className="card">
         <button onClick={() => setCount((count) => count + 1)}>
           count is {count}
@@ -25,7 +33,7 @@ function App() {
           Edit <code>src/App.jsx</code> and save to test HMR
         </p>
         <p>
-          hello world moja prva aplikacija u React-u
+          { truncated };
         </p>
       </div>
       <p className="read-the-docs">
