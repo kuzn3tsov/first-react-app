@@ -5,10 +5,13 @@ import './App.css'
 import { nanoid } from 'nanoid'
 import add , { multiply }  from './library/math.js';
 import { truncate }  from './library/string.js';
+import { n2br }  from './library/string.js';
+
 
 add(2, 3);
 multiply(4, 5);
 const truncated = truncate("Hello, world!", 5, "...");
+const withLineBreaks = n2br("Hello\nWorld!");
 
 function App() {
   const [count, setCount] = useState(0)
@@ -34,6 +37,9 @@ function App() {
         </p>
         <p>
           { truncated };
+        </p>
+        <p>
+          { withLineBreaks };
         </p>
       </div>
       <p className="read-the-docs">
