@@ -6,6 +6,3 @@ export function truncate(string = '', limit, symbol = '') {
         return string.slice(0, limit) + symbol;
     }
 };
-export function n2br(str) {
-    return str.replace(/\n/g, '<br>');
-}

@@ -4,10 +4,8 @@ import viteLogo from '/vite.svg'
 import './App.css'
 import { nanoid } from 'nanoid'
 import add , { multiply }  from './library/math.js';
-import { truncate }  from './library/string.js';
-import { n2br }  from './library/string.js';
-
-
+import { truncate, n2br } from './library/index.js';
+import ContactForm from './library/ContactForm';
 add(2, 3);
 multiply(4, 5);
 const truncated = truncate("Hello, world!", 5, "...");
@@ -42,6 +40,10 @@ function App() {
           { withLineBreaks };
         </p>
       </div>
+      <div>
+      <h2>Kontaktirajte nas</h2>
+      <ContactForm />
+    </div>
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
       </p>
