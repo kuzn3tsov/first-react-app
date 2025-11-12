@@ -1,15 +1,25 @@
+import { useState } from 'react';
 import Greeting from './components/Greeting';
-import CoinToss from './components/CoinToss';
-import RockPaperScissors from './components/RockPaperScissors';
-import { Counter } from './components/Counter';
+import HomePage from './pages/HomePage';
+import DashboardPage from './pages/DashboardPage';
+import './App.css';
 
 function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  const handleAuthClick = () => {
+    setIsLoggedIn(!isLoggedIn);
+  };
+
   return (
-    <div>
-      <Counter counterStart={5} counterStepUp={2} counterStepDown={5}/>
-      <Greeting name='Lem' morningTimeFrom={5} morningTimeTo={12} dayTimeFrom={12} dayTimeTo={18} />
-      <CoinToss headsMessage={"Glava"} tailsMessage={"Pismo"} headChance={0.8} />
-      <RockPaperScissors rockMessage={"Izabrali ste Kamen!"} paperMessage={"Izabrali ste Papir!"} scissorsMessage={"Izabrali ste Škare!"} />
+    <div className="App">
+      <Greeting />
+
+      <button onClick={handleAuthClick}>
+        {isLoggedIn ? 'Sign out' : 'Sign in'}
+      </button>
+
+      {isLoggedIn ? <DashboardPage /> : <HomePage />}
     </div>
   );
 }
