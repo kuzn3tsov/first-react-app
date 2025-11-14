@@ -1,8 +1,11 @@
-export function truncate(string = '', limit, symbol = '') {
-    if (string.length <= limit) {
-        return string;
+export function truncate(value, limit, symbol) {
+    if (typeof value !== 'string') {
+        return value;
     }
-    else {
-        return string.slice(0, limit) + symbol;
+
+    if (value.length <= limit) {
+        return value;
     }
-};
+
+    return value.substring(0, limit) + symbol;
+}

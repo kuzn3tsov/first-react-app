@@ -1,26 +1,53 @@
-import { useState } from 'react';
-import Greeting from './components/Greeting';
-import HomePage from './pages/HomePage';
-import DashboardPage from './pages/DashboardPage';
-import './App.css';
+import { useState } from "react";
+import { HomePage } from "./pages/HomePage.jsx";
+import { DashboardPage } from "./pages/DashboardPage.jsx";
+import { Header } from "./components/Header.jsx";
+import { ErrorPopup } from "./components/ErrorPopup.jsx";
+
+const allowedUsers = {
+  pperic: "password123!",
+  dvukovic: "lozinka456!",
+  krade: "ovonitkonecepogoditi",
+};
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [user, setUser] = useState(null);
+  const [error, setError] = useState(null);
+  const [showErrorPopup, setShowErrorPopup] = useState(false);
 
-  const handleAuthClick = () => {
-    setIsLoggedIn(!isLoggedIn);
+  const handleSignIn = (username, password) => {
+    const userPassword = allowedUsers[username];
+
+    if (userPassword && userPassword === password) {
+      setUser(username);
+      setError(null);
+      setShowErrorPopup(false);
+    } else {
+      const errorMessage = "Invalid username or password";
+      setError(errorMessage);
+      setShowErrorPopup(true);
+    }
+  };
+
+  const handleSignOut = () => {
+    setUser(null);
+    setError(null);
+    setShowErrorPopup(false);
+  };
+
+  const closeErrorPopup = () => {
+    setShowErrorPopup(false);
+    setError(null);
   };
 
   return (
-    <div className="App">
-      <Greeting />
-
-      <button onClick={handleAuthClick}>
-        {isLoggedIn ? 'Sign out' : 'Sign in'}
-      </button>
-
-      {isLoggedIn ? <DashboardPage /> : <HomePage />}
-    </div>
+    <>
+      <Header onSignIn={handleSignIn} onSignOut={handleSignOut} user={user} />
+      {user ? <DashboardPage /> : <HomePage />}
+      {showErrorPopup && (
+        <ErrorPopup message={error} onClose={closeErrorPopup} />
+      )}
+    </>
   );
 }
 

@@ -1,9 +1,7 @@
-function HomePage() {
-    return (
-        <div>
-            <h1>Welcome to the Home Page!</h1>
-        </div>
-    );
+export function HomePage() {
+  return (
+    <>
+      <h1>Welcome to the Home Page!</h1>
+    </>
+  );
 }
-
-export default HomePage;

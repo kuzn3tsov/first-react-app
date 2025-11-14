@@ -1,21 +1,19 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
-export default function CoinToss({ headsMessage = "It's Heads!", tailsMessage = "It's Tails!", headChance = 0.5 }) {
-    const [result, setResult] = useState(null);
-    const tossCoin = () => {
-        const isHeads = Math.random() < headChance;
-        setResult(isHeads ? 'heads' : 'tails');
-    };
+export function CoinToss({ headsMessage, tailsMessage, headsChance }) {
+  const [isHeads, setIsHeads] = useState(null);
 
-    return (
-        <div className="coin-toss">
-            <button onClick={tossCoin}>Toss Coin</button>
-            {result && (
-                <div className="result">
-                    {result === 'heads' ? headsMessage : tailsMessage}
-                </div>
-            )}
-        </div>
-    );
+  const handleClick = () => {
+    setIsHeads(Math.random() < headsChance);
+  };
 
+  const message = isHeads ? headsMessage : tailsMessage;
+  const showMessage = isHeads !== null;
+
+  return (
+    <div>
+      <button onClick={handleClick}>Toss a coin!</button>
+      {showMessage && <span>{message}</span>}
+    </div>
+  );
 }

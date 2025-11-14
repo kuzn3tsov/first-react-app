@@ -1,28 +1,30 @@
-import React from 'react';
+export function Greeting(props) {
+  const {
+    morningMessage,
+    morningRange,
+    afternoonMessage,
+    afternoonRange,
+    eveningMessage,
+    eveningRange,
+    nightMessage,
+    nightRange,
+  } = props;
+  const currentHour = new Date().getHours();
 
-const Greeting = ({ name = 'Lem', morningTimeFrom = 5, morningTimeTo = 12, dayTimeFrom = 12, dayTimeTo = 18 }) => {
-    const getGreeting = () => {
-        const hour = new Date().getHours();
+  const isMorning =
+    currentHour >= morningRange[0] && currentHour < morningRange[1];
+  const isAfternoon =
+    currentHour >= afternoonRange[0] && currentHour < afternoonRange[1];
+  const isEvening =
+    currentHour >= eveningRange[0] && currentHour < eveningRange[1];
+  const isNight = currentHour >= nightRange[0] && currentHour < nightRange[1];
 
-        if (hour >= morningTimeFrom && hour < morningTimeTo) {
-            return 'Dobro jutro';
-        } else if (hour >= dayTimeFrom && hour < dayTimeTo) {
-            return 'Dobar dan';
-        } else {
-            return 'Dobra večer';
-        }
-    };
-
-    const greeting = getGreeting();
-
-    return (
-        <div className="greeting">
-            <h2>
-                {greeting}
-                {name && `, ${name}`}!
-            </h2>
-        </div>
-    );
-};
-
-export default Greeting;
+  return (
+    <>
+      {isMorning && <span>{morningMessage}</span>}
+      {isAfternoon && <span>{afternoonMessage}</span>}
+      {isEvening && <span>{eveningMessage}</span>}
+      {isNight && <span>{nightMessage}</span>}
+    </>
+  );
+}
